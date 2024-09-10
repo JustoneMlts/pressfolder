@@ -1,0 +1,258 @@
+.App {
+  text-align: center;
+}
+
+.background {
+	background: linear-gradient(-45deg, #654593, #292150, #251436, #140e2a);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+.avatar {
+  transition: transform 0.2s ease-in-out;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.md-bg-nav-img {
+  background-image: url('./Assets/MistNavImg.jpeg');
+  background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la zone */
+  background-position: center; /* Centre l'image à l'intérieur de l'élément */
+}
+
+/* NeonHover.css */
+.avatar-container {
+  position: relative;
+  display: flex;
+  margin: 20px;
+}
+
+.avatar-container img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  transition: filter 0.3s;
+}
+
+.avatar-container::before,
+.avatar-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+}
+
+.avatar-container::before {
+  box-shadow: 0 0 5px rgba(255, 0, 150, 0.7);
+  animation: neon 1.5s infinite alternate;
+}
+
+.avatar-container::after {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.avatar-container:hover::before,
+.avatar-container:hover::after {
+  opacity: 1;
+}
+
+@keyframes neon {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.7),
+                0 0 20px rgba(238, 130, 238, 0.7),
+                0 0 30px rgba(75, 0, 130, 0.7),
+                0 0 40px rgba(0, 0, 255, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(223, 3, 223, 0.7),
+                0 0 40px rgba(238, 130, 238, 0.7),
+                0 0 60px rgba(75, 0, 130, 0.7),
+                0 0 80px rgba(0, 0, 255, 0.7);
+  }
+}
+
+.animation-social:hover {
+  box-shadow: 0 5px 35px 0px rgba(0,0,0,.1);
+}
+
+.animation-social:hover::before, .animation-social:hover::after {
+  display: flex;
+  content: '';
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background: #FDA8CF;
+  border-radius: 75px;
+  z-index: -1;
+  animation: 1s clockwise infinite;
+}
+
+.animation-social:after {
+  background: #c836a6;
+  animation: 2s counterclockwise infinite;
+}
+
+
+@keyframes clockwise {
+  0% {
+    top: -5px;
+    left: 0;
+  }
+  12% {
+    top: -2px;
+    left: 2px;
+  }
+  25% {
+    top: 0;
+    left: 5px;    
+  }
+  37% {
+    top: 2px;
+    left: 2px;
+  }
+  50% {
+    top: 5px;
+    left: 0;    
+  }
+  62% {
+    top: 2px;
+    left: -2px;
+  }
+  75% {
+    top: 0;
+    left: -5px;
+  }
+  87% {
+    top: -2px;
+    left: -2px;
+  }
+  100% {
+    top: -5px;
+    left: 0;    
+  }
+}
+
+@keyframes counterclockwise {
+  0% {
+    top: -5px;
+    right: 0;
+  }
+  12% {
+    top: -2px;
+    right: 2px;
+  }
+  25% {
+    top: 0;
+    right: 5px;    
+  }
+  37% {
+    top: 2px;
+    right: 2px;
+  }
+  50% {
+    top: 5px;
+    right: 0;    
+  }
+  62% {
+    top: 2px;
+    right: -2px;
+  }
+  75% {
+    top: 0;
+    right: -5px;
+  }
+  87% {
+    top: -2px;
+    right: -2px;
+  }
+  100% {
+    top: -5px;
+    right: 0;    
+  }
+}
+
+main {
+	background: linear-gradient(-45deg, #1a1a1a, #1c071c, #1b0625, #250c30);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
