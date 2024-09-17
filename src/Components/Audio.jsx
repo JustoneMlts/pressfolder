@@ -44,12 +44,14 @@ export default function Audio ({ currentTrack, setCurrentTrack }) {
     };
 
     const handlePlayPause = () => {
-        if (isPlaying) {
-            audioRef.current.pause();
-        } else {
-            audioRef.current.play();
-        }
-        setIsPlaying(!isPlaying);
+        if (audioRef && audioRef.current) {
+            if (isPlaying) {
+                audioRef.current.pause();
+            } else {
+                audioRef.current.play();
+            }
+            setIsPlaying(!isPlaying);
+        }       
     };
 
     const handlePreviousTrack = () => {
@@ -76,14 +78,16 @@ export default function Audio ({ currentTrack, setCurrentTrack }) {
             audioRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
 
             return () => {
-                audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
-                audioRef.current.removeEventListener('loadedmetadata', handleLoadedMetadata);
+                if(audioRef && audioRef.current) {
+                    audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+                    audioRef.current.removeEventListener('loadedmetadata', handleLoadedMetadata);
+                }
             };
         }
     }, []);
 
     useEffect(() => {
-        if (isPlaying && audioRef) audioRef.current.play();
+        if (isPlaying && audioRef && audioRef.current) audioRef.current.play();
     }, [currentTrack])
 
     // useEffect(() => {

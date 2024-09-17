@@ -56,20 +56,20 @@ export default function Component() {
 
   const useWindowWidth = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  
+
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
-  
+
     useEffect(() => {
       window.addEventListener('resize', handleResize);
-  
+
       // Nettoyage de l'écouteur d'événement lors du démontage du composant
       return () => {
         window.removeEventListener('resize', handleResize);
       };
     }, []); // Aucune dépendance, cela signifie que cet effet ne s'exécute qu'une fois lors du montage initial du composant
-  
+
     return windowWidth;
   };
   const width = useWindowWidth();
@@ -187,19 +187,19 @@ export default function Component() {
   };
 
   const artistsArray = [
-    { avatar: Ju, name: "Justin Maltese", function: "Guitare / Chant", social: "@Ju.mlts", url: "https://www.instagram.com/ju.mlts/", avatarModal: Ju2 },
-    { avatar: Du, name: "Matthieu Duroyon", function: "Basse / Chant", social: "@Ma.dryn", url: "https://www.instagram.com/ma.dryn_/", avatarModal: Matt2 },
-    { avatar: Vicasye, name: "Vicasye", function: "Batterie", social: "@Vicasye", url: "https://www.instagram.com/vicasye/", avatarModal: Vicasye2 },
+    { avatar: Ju, name: "Justin Maltese", function: "Guitare / Chant", social: "@Ju.mlts", url: "https://www.instagram.com/ju.mlts/", avatarModal: Ju2, description: "est le guitariste et chanteur de Mist, un groupe de rock amateur où l'énergie brute prime. Avec des riffs percutants et une voix qui vient des tripes, il transmet toute l'intensité et la passion du rock alternatif. Son chant sincère et sans artifices, associé à un jeu de guitare incisif, donne au groupe une authenticité qui touche le public en plein cœur." },
+    { avatar: Du, name: "Matthieu Duroyon", function: "Basse / Chant", social: "@Ma.dryn", url: "https://www.instagram.com/ma.dryn_/", avatarModal: Matt2, description: "est le bassiste et choriste de Mist, apportant à la fois profondeur et nuances aux morceaux du groupe. Sa voix grave et puissante enrichit les harmonies vocales, tandis que son jeu de basse oscille entre mélodies subtiles et lignes bien lourdes, parfaitement dosées pour donner du poids aux moments les plus intenses. Grâce à son sens aigu de la mélodie, il sait quand adoucir l’ambiance et quand ancrer les morceaux dans une énergie brute et percutante." },
+    { avatar: Vicasye, name: "Vicasye", function: "Batterie", social: "@Vicasye", url: "https://www.instagram.com/vicasye/", avatarModal: Vicasye2, description: "est le batteur de Mist, véritable virtuose derrière son kit. Son jeu technique et précis fait de lui le moteur rythmique du groupe, capable de soutenir les mélodies avec une simplicité efficace quand il le faut. Mais dès que le morceau l'exige, il n'hésite pas à envoyer des fills complexes et puissants, ajoutant une dynamique explosive à la musique. Son équilibre entre maîtrise technique et subtilité fait de lui un pilier incontournable du son de Mist." },
   ];
 
   const images = [
     {
-      original: {MistLive},
-      thumbnail: {MistLive}
+      original: { MistLive },
+      thumbnail: { MistLive }
     },
     {
-      original: {MistLive},
-      thumbnail: {MistLive}
+      original: { MistLive },
+      thumbnail: { MistLive }
     },
   ];
 
@@ -226,13 +226,13 @@ export default function Component() {
   );
 
   return (
-    <div 
-      className="w-full h-full text-[#f0f0f0] min-h-[100vh] flex flex-col" 
+    <div
+      className="w-full h-full text-[#f0f0f0] min-h-[100vh] flex flex-col"
     >
       <div className='flex h-full w-full bg-[#1a1a1a]'>
         <header className="w-full px-4 py-6 h-34 md:px-6 md:py-8 shadow-md flex flex-col justify-center" >
-          <div className="container w-full max-w-6xl mx-auto flex items-center justify-between">
-            <div className='w-1/3'>
+          <div className="container w-full max-w-6xl mx-auto flex justify-center items-center sm:justify-between">
+            <div className='sm:w-1/3'>
               <img className='w-16' src={MistLogo} />
             </div>
             <nav className="hidden w-2/3 md:flex justify-start items-center gap-24">
@@ -246,12 +246,6 @@ export default function Component() {
                 RESEAUX SOCIAUX
               </a>
             </nav>
-
-            {width < 768 &&
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <MenuIcon className="w-5 h-5 text-white" />
-              </Button>
-            }
           </div>
         </header>
       </div>
@@ -266,52 +260,38 @@ export default function Component() {
       </section>
       <main className="flex-1 h-full">
         <div className=" text-[#f0f0f0] h-full flex flex-col">
-          <div
-            // style={{ backgroundImage: `url(${Background2})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
-
-          >
-          <section id="about" className={`h-full mb-16 z-50 mx-auto lg:px-36 px-6 fade-in ${isVisibleAbout ? 'active' : ''}`}
-          >
-            <div className="grid md:grid-cols-2 gap-8 justify-center items-center">
-              <div>
-                <h1 className="text-3xl font-bold mb-4 text-white">About Mist</h1>
-                <p className="text-[#b3b3b3]">
-                  Mist are a dynamic rock band that has been captivating audiences with their
-                  electrifying performances and infectious energy. Formed in 2015, the band has quickly established
-                  itself as a rising force in the local music scene, garnering a loyal following and critical acclaim.
-                </p>
-                <p className="text-[#b3b3b3] mt-4">
-                  Blending classic rock influences with a modern twist, Mist' sound is a unique and
-                  powerful fusion that resonates with music lovers of all ages. Their live shows are a must-see,
-                  featuring high-energy guitar riffs, thunderous drums, and soulful vocals that leave audiences wanting
-                  more.
-                </p>
-              </div>
-              <div className="flex justify-center z-50">
-                {/* <img
-                  src={MistLive}
-                  alt="Mist Live"
-                  width={400}
-                  height={300}
-                  className="rounded-lg shadow-lg"
-                /> */}
-                <Caroussel />
-              </div>
-            </div>
-          </section>
-          <section id="band-members" className={`mb-16 z-0 w-full lg:px-36 px-6 fade-in ${isVisibleBandMembers ? 'active' : ''}`}
-          >  
-            <h2 className="text-2xl font-bold mb-4 text-white">Meet Our Band Members</h2>
-            <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 h-full items-center justify-center`}>
-              {artistsArray.map((artist, index) => (
-                <div  key={index} >{displayArtists(artist, index)}
+          <div>
+            <section id="about" className={`h-full mb-16 z-50 mx-auto lg:px-36 px-6 fade-in ${isVisibleAbout ? 'active' : ''}`}>
+              <div className="grid md:grid-cols-2 gap-8 justify-center items-center">
+                <div>
+                  <h1 className="text-3xl font-bold mb-4 text-white">A Propos de Mist</h1>
+                  <p className="text-[#b3b3b3]">
+                    Mist est né de l’amitié de 15 ans entre Justin (guitare, chant) et Matthieu (basse, chœurs), un duo inséparable qui a exploré divers styles musicaux avant de trouver leur véritable identité dans un rock alternatif puissant et authentique.
+                  </p>
+                  <p className="text-[#b3b3b3] mt-4">
+                    Après des années à jouer à deux, le groupe prend une nouvelle dimension avec l'arrivée de Vicasye à la batterie lors de l'enregistrement de leur premier EP Lost Media. Sa maîtrise technique et son jeu énergique apportent une dynamique nouvelle, consolidant la vision musicale de Mist. Ce trio, soudé par une longue histoire et une passion commune pour la musique, propose un son à la fois mélodique et percutant, marqué par des moments de finesse et des explosions de puissance.
+                  </p>
                 </div>
-              ))}
-            </div>
-            {isOpen && 
-              <Modal isOpen={isOpen} setIsOpen={setIsOpen} data={currentArtist} />
-            }
+                <div className="flex justify-center relative z-50">
+                  <Caroussel />
+                </div>
+              </div>
             </section>
+            <section
+              id="band-members"
+              className={`mb-16 relative z-0 w-full lg:px-36 px-6 fade-in ${isVisibleBandMembers ? 'active' : ''}`}
+            >
+              <h2 className="text-2xl font-bold mb-4 text-white">Rencontrez notre groupe</h2>
+              <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 h-full items-center justify-center`}>
+                {artistsArray.map((artist, index) => (
+                  <div key={index}>{displayArtists(artist, index)}</div>
+                ))}
+              </div>
+              {isOpen && (
+                <Modal isOpen={isOpen} setIsOpen={setIsOpen} data={currentArtist} />
+              )}
+            </section>
+
           </div>
           <section id="music" className={`w-full justify-center shadow-md fade-in ${isVisibleMusic ? 'active' : ''}`}
             style={{ backgroundImage: `url(${Background4})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
@@ -325,34 +305,34 @@ export default function Component() {
             />
           </section>
           <div className='pt-16 bg-[#1a1a1a]'
-            // style={{ backgroundImage: `url(${Background8})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
+          // style={{ backgroundImage: `url(${Background8})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
 
           >
-          <section className={`w-full h-full lg:flex lg:flex-row lg:justify-start lg:pr-36 md:flex-col`}>
-            <section className='lg:w-1/3 w-full h-full justify-start px-6 mb-16'>
-              <Audio currentTrack={musicArray[currentTrackIndex]} setCurrentTrack={handleTrackChange} />
+            <section className={`w-full h-full lg:flex lg:flex-row lg:justify-start lg:pr-36 md:flex-col`}>
+              <section className='lg:w-1/3 w-full h-full justify-start px-6 mb-16'>
+                <Audio currentTrack={musicArray[currentTrackIndex]} setCurrentTrack={handleTrackChange} />
+              </section>
+              <section className='bg-[#2a2a2a] lg:w-3/5 md:w-full h-full p-4 rounded-lg mb-16'>
+                <div className='w-full text-2xl items-center'>
+                  <h1 className='text-3xl mb-10'>{musicArray[currentTrackIndex].title}</h1>
+                  {renderLyricsLines(renderLyrics(currentTrackIndex))}
+                </div>
+              </section>
             </section>
-            <section className='bg-[#2a2a2a] lg:w-3/5 md:w-full h-full p-4 rounded-lg mb-16'>
-              <div className='w-full text-2xl items-center'>
-                <h1 className='text-3xl mb-10'>{musicArray[currentTrackIndex].title}</h1>
-                {renderLyricsLines(renderLyrics(currentTrackIndex))}
-              </div>
-            </section>
-          </section>
-         <section>
-        {/* <section>
+            <section>
+              {/* <section>
           <InstagramFeed />
         </section> */}
-         </section>
-          <section id="social" className={`mx-auto w-full lg:px-36 px-6 pb-12 md:pb-16 fade-in ${isVisibleSocial ? 'active' : ''}`}>
-            <h2 className="text-2xl font-bold mb-4 text-white">Follow Us</h2>
-            <div className="grid gap-4 h-full lg:grid-cols-4 grid-cols-2 items-center justify-center">
-              {socials.map((social, index) => (
-                <div key={index}>{displaySocials(social)}</div>
-              ))}
-            </div>
-            <div class='light x1'></div>
-          </section>
+            </section>
+            <section id="social" className={`mx-auto w-full lg:px-36 px-6 pb-12 md:pb-16 fade-in ${isVisibleSocial ? 'active' : ''}`}>
+              <h2 className="text-2xl font-bold mb-4 text-white">Follow Us</h2>
+              <div className="grid gap-4 h-full lg:grid-cols-4 grid-cols-2 items-center justify-center">
+                {socials.map((social, index) => (
+                  <div key={index}>{displaySocials(social)}</div>
+                ))}
+              </div>
+              <div class='light x1'></div>
+            </section>
           </div>
         </div>
       </main>

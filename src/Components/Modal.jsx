@@ -22,7 +22,7 @@ export default function Component({ isOpen, setIsOpen, data }) {
         style: {
           backgroundColor: 'transparent',
           boxShadow: 'none',
-          maxWidth: '600px', // Limite la largeur pour qu'elle n'occupe pas toute la largeur de l'écran
+          maxWidth: '700px', // Limite la largeur pour qu'elle n'occupe pas toute la largeur de l'écran
           width: '100%', // S'assure que la modal prend tout l'espace défini par `maxWidth`
           margin: 'auto', // Pour centrer la modal horizontalement
           overflow: 'hidden', // Masquer le débordement par défaut
@@ -54,12 +54,12 @@ export default function Component({ isOpen, setIsOpen, data }) {
               </div>
               <div className="w-full sm:w-2/3 p-8 flex flex-col justify-between h-full">
                 <div>
-                  <h2 className="text-3xl font-bold mb-4 text-white">Jane Doe</h2>
+                  <h2 className="text-3xl font-bold mb-4 text-white">{data.name}</h2>
                   <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                    Photographe passionnée | Voyageuse | Amoureuse de la nature
+                    {data.function}
                   </p>
                   <p className="text-base text-gray-400 mb-6">
-                    Capturer la beauté du monde, un cliché à la fois. Je partage mes aventures et mes meilleures prises de vue à travers mon objectif. Suivez-moi pour un voyage visuel autour du globe !
+                    {data.description}
                   </p>
                 </div>
                 <a
