@@ -35,6 +35,10 @@ import Background6 from './Assets/Background6.svg'
 import Background7 from './Assets/Background7.svg'
 import Background8 from './Assets/Background8.svg'
 import InstagramFeed from './Components/InstagramFeed';
+import Modal from './Components/Modal.jsx';
+import Vicasye2 from './Assets/Vicasye2.jpg';
+import Matt2 from './Assets/Matt2.jpg';
+import Ju2 from './Assets/Ju3.jpg';
 
 
 
@@ -47,6 +51,28 @@ export default function Component() {
   const [isVisibleBandMembers, setIsVisibleBandMembers] = useState(false);
   const [isVisibleMusic, setIsVisibleMusic] = useState(false);
   const [isVisibleSocial, setIsVisibleSocial] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const [currentArtist, setCurrentArtist] = useState([]);
+
+  const useWindowWidth = () => {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+  
+    useEffect(() => {
+      window.addEventListener('resize', handleResize);
+  
+      // Nettoyage de l'écouteur d'événement lors du démontage du composant
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []); // Aucune dépendance, cela signifie que cet effet ne s'exécute qu'une fois lors du montage initial du composant
+  
+    return windowWidth;
+  };
+  const width = useWindowWidth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,7 +81,6 @@ export default function Component() {
       const bandMembersSection = document.getElementById('band-members');
       const musicSection = document.getElementById('music');
       const socialSection = document.getElementById('social');
-
       if (headerPictureSection && !isVisibleHeaderPicture && isElementInViewport(headerPictureSection)) {
         setIsVisibleHeaderPicture(true);
       }
@@ -89,12 +114,9 @@ export default function Component() {
     );
   };
 
-  const handleClick = (event, data) => {
-    if (event.ctrlKey || event.metaKey) {
-      window.open(data.url, '_blank');
-    } else {
-      window.location.href = data.url;
-    }
+  const handleClick = (e, artist) => {
+    setCurrentArtist(artist);
+    setIsOpen(true);
   };
 
   const socials = [
@@ -165,9 +187,9 @@ export default function Component() {
   };
 
   const artistsArray = [
-    { avatar: Ju, name: "Justin Maltese", function: "Guitare / Chant", social: "@Ju.mlts", url: "https://www.instagram.com/ju.mlts/" },
-    { avatar: Du, name: "Matthieu Duroyon", function: "Basse / Chant", social: "@Ma.dryn", url: "https://www.instagram.com/ma.dryn_/" },
-    { avatar: Vicasye, name: "Vicasye", function: "Batterie", social: "@Vicasye", url: "https://www.instagram.com/vicasye/" },
+    { avatar: Ju, name: "Justin Maltese", function: "Guitare / Chant", social: "@Ju.mlts", url: "https://www.instagram.com/ju.mlts/", avatarModal: Ju2 },
+    { avatar: Du, name: "Matthieu Duroyon", function: "Basse / Chant", social: "@Ma.dryn", url: "https://www.instagram.com/ma.dryn_/", avatarModal: Matt2 },
+    { avatar: Vicasye, name: "Vicasye", function: "Batterie", social: "@Vicasye", url: "https://www.instagram.com/vicasye/", avatarModal: Vicasye2 },
   ];
 
   const images = [
@@ -182,18 +204,18 @@ export default function Component() {
   ];
 
   const displayArtists = (artist, index) => (
-    <div key={index} className={`flex flex-col w-full items-center avatar hover:cursor-pointer z-0`}
+    <div key={index} className="flex flex-col w-full items-center avatar hover:cursor-pointer z-0"
       onClick={(e) => { handleClick(e, artist) }}
     >
-      <div className='w-full flex items-center justify-center  '>
-        <div className='avatar-container'>
-        <Avatar src={artist?.avatar} alt="Band Member" sx={{ width: 150, height: 150 }} />
+      <div className='w-full flex items-center justify-center'>
+        <div className='avatar-container animate-pulse'>
+          <Avatar src={artist?.avatar} alt="Band Member" sx={{ width: 150, height: 150 }} />
         </div>
       </div>
       <div className="text-center">
         <h3 className="text-lg font-semibold text-white">{artist?.name}</h3>
         <p className="text-[#b3b3b3]">{artist?.function}</p>
-        <p className=''>
+        <p>
           <div className='w-full h-full flex justify-center items-center'>
             <img src={InstaIcon} className='mr-1 w-4' alt="Instagram Icon" />
             <p className='flex items-center'>{artist.social}</p>
@@ -208,26 +230,30 @@ export default function Component() {
       className="w-full h-full text-[#f0f0f0] min-h-[100vh] flex flex-col" 
     >
       <div className='flex h-full w-full bg-[#1a1a1a]'>
-      <header className="px-4 py-6 h-34 md:px-6 md:py-8 shadow-md flex flex-col justify-center" >
-        <div className="container max-w-6xl mx-auto flex items-center justify-between">
-          <div className="container max-w-6xl mx-auto flex items-center justify-between">
-        </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <span href="#" className="text-sm font-medium hover:text-white transition-colors" prefetch={false}>
-              About
-            </span>
-            <span href="#" className="text-sm font-medium hover:text-white transition-colors" prefetch={false}>
-              Music
-            </span>
-            <span href="#" className="text-sm font-medium hover:text-white transition-colors" prefetch={false}>
-              Social
-            </span>
-          </nav>
-          <Button variant="ghost" size="icon" className="md:hidden">
-            <MenuIcon className="w-5 h-5 text-white" />
-          </Button>
-        </div>
-      </header>
+        <header className="w-full px-4 py-6 h-34 md:px-6 md:py-8 shadow-md flex flex-col justify-center" >
+          <div className="container w-full max-w-6xl mx-auto flex items-center justify-between">
+            <div className='w-1/3'>
+              <img className='w-16' src={MistLogo} />
+            </div>
+            <nav className="hidden w-2/3 md:flex justify-start items-center gap-24">
+              <a href="#about" className="text-xl font-medium hover:text-white transition-colors transition duration-300 ease-in-out hover:scale-110 p-2 hover:cursor-pointer" prefetch={false}>
+                A PROPOS
+              </a>
+              <a href="#music" className="text-xl font-medium hover:text-white transition-colors transition duration-300 ease-in-out hover:scale-110 p-2 hover:cursor-pointer" prefetch={false}>
+                MUSIQUE
+              </a>
+              <a href="#social" className="text-xl font-medium hover:text-white transition-colors transition duration-300 ease-in-out hover:scale-110 p-2 hover:cursor-pointer" prefetch={false}>
+                RESEAUX SOCIAUX
+              </a>
+            </nav>
+
+            {width < 768 &&
+              <Button variant="ghost" size="icon" className="md:hidden">
+                <MenuIcon className="w-5 h-5 text-white" />
+              </Button>
+            }
+          </div>
+        </header>
       </div>
       <section id="headerPicture" className={`w-full relative shadow-md fade-in ${isVisibleHeaderPicture ? 'active' : ''}`}>
         <img
@@ -278,10 +304,14 @@ export default function Component() {
             <h2 className="text-2xl font-bold mb-4 text-white">Meet Our Band Members</h2>
             <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 h-full items-center justify-center`}>
               {artistsArray.map((artist, index) => (
-                <div  key={index} >{displayArtists(artist, index)}</div>
+                <div  key={index} >{displayArtists(artist, index)}
+                </div>
               ))}
             </div>
-          </section>
+            {isOpen && 
+              <Modal isOpen={isOpen} setIsOpen={setIsOpen} data={currentArtist} />
+            }
+            </section>
           </div>
           <section id="music" className={`w-full justify-center shadow-md fade-in ${isVisibleMusic ? 'active' : ''}`}
             style={{ backgroundImage: `url(${Background4})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
@@ -310,9 +340,9 @@ export default function Component() {
             </section>
           </section>
          <section>
-        <section>
+        {/* <section>
           <InstagramFeed />
-        </section>
+        </section> */}
          </section>
           <section id="social" className={`mx-auto w-full lg:px-36 px-6 pb-12 md:pb-16 fade-in ${isVisibleSocial ? 'active' : ''}`}>
             <h2 className="text-2xl font-bold mb-4 text-white">Follow Us</h2>

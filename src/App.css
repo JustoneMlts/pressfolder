@@ -21,6 +21,24 @@
 	}
 }
 
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05); /* Léger gonflement */
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 640px) { /* Ajustez la largeur maximale en fonction de vos besoins */
+  .animate-pulse {
+    animation: pulse 1.5s infinite ease-in-out; /* Animation continue */
+  }
+}
+
 
 .avatar {
   transition: transform 0.2s ease-in-out;
